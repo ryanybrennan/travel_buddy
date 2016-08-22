@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Dashboard</title>
+  </head>
+  <body>
+    <div id= "nav">
+      <h1>Welcome {{request.session.user}} <a href="{% url 'login_reg' %}">Logout</a></h1>
+    </div>
+    <div id="my_trips">
+      <h3>Trip Schedules</h3>
+      <table>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Plan</th>
+        {% for travel in travels %}
+          <tr>
+            <td><a href="{% url 'destination' id=travel.id %}">{{travel.destination}}</a></td>
+            <td>{{travel.travel_from}}</td>
+            <td>{{travel.travel_to}}</td>
+            <td>{{travel.description}}</td>
+          </tr>
+          {% endfor %}
+          {% for joiner in joiners %}
+            <tr>
+              <td><a href="{% url 'destination' id=joiner.id %}">{{joiner.destination}}</a></td>
+              <td>{{joiner.travel_from}}</td>
+              <td>{{joiner.travel_to}}</td>
+              <td>{{joiner.description}}</td>
+            </tr>
+            {% endfor %}
+      </table>
+    </div>
+    <div id="other trips">
+      <h3>Other User's Travel Plans</h3>
+      <table>
+        <th>Name</th>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Do You Want To Join?</th>
+        {% for other in others %}
+          <tr>
+            <td>{{other.user.name}}</td>
+            <td><td><a href="{% url 'destination' id=other.id %}">{{other.destination}}</a></td></td>
+            <td>{{other.travel_from}}</td>
+            <td>{{other.travel_to}}</td>
+            <td><a href="{% url 'join_trip' id=other.id %}">Join</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <a href="{% url 'add_trip' %}">Add Travel Plan</a>
+  </body>
+</html>

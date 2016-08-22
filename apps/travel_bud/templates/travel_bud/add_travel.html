@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Plan</title>
+  </head>
+  <body>
+<p><a href="{% url 'travel_dash' %}">Home</a> <a href="{% url 'login_reg' %}">Logout</a></p>
+<h1>Add a Trip</h1>
+{% if messages %}
+<ul class="messages">
+{% for msg in messages %}
+<li>
+  <div class="alert alert-{{msg.30_error}}" role="alert">
+{{msg.message}}
+</div>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+<form action="{% url 'create' %}" method="post">
+  {% csrf_token %}
+  <p>Destination:<input type="text" name="destination"></p>
+  <p>Description:<input type="text" name="description"></p>
+  <p>Travel Date From:<input type="date" name="travel_from" max = "travel_to"></p>
+  <p>Travel Date To:<input type="date" name="travel_to" min = "travel_from"></p>
+  <input type="submit" name="add" value="Add">
+</form>
+
+
+
+
+  </body>
+</html>
