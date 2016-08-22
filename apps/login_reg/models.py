@@ -37,7 +37,7 @@ class UserManager(models.Manager):
 class User(models.Model):
     name = models.CharField(max_length = 255)
     username = models.CharField(max_length = 50)
-    password = models.CharField(max_length = 30)
+    password = models.CharField(max_length = 100)
     created_at = models.DateTimeField(auto_now_add= True)
     updated_at = models.DateTimeField(auto_now = True)
     travel = models.ManyToManyField('travel_bud.Travel', related_name = 'traveluser')
